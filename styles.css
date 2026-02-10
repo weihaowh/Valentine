@@ -1,11 +1,13 @@
 :root {
     --bg-color: #fce4ec;
     --primary-pink: #f06292;
-    --dark-pink: #d81b60;
-    --light-pink: #f8bbd0;
     --envelope-color: #ffffff;
     --envelope-flap: #f48fb1;
+    --envelope-pocket-sides: #fdfdfd;
+    --envelope-pocket-bottom: #f9f9f9;
     --text-color: #880e4f;
+    --puzzle-size: 100px;
+    --puzzle-gap: 5px;
 }
 
 * {
@@ -157,9 +159,9 @@ section.active {
 /* --- Puzzle Styling --- */
 #puzzle-container {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
+    grid-template-columns: repeat(3, var(--puzzle-size));
+    grid-template-rows: repeat(3, var(--puzzle-size));
+    gap: var(--puzzle-gap);
     margin-top: 20px;
     background: white;
     padding: 10px;
@@ -168,18 +170,25 @@ section.active {
 }
 
 .puzzle-piece {
-    width: 100px;
-    height: 100px;
-    background-size: 300px 300px;
+    width: var(--puzzle-size);
+    height: var(--puzzle-size);
+    background-size: calc(var(--puzzle-size) * 3) calc(var(--puzzle-size) * 3);
     border-radius: 4px;
-    cursor: grab;
-    transition: transform 0.2s;
+    cursor: pointer;
+    transition: all 0.2s;
+    touch-action: none;
+    border: 2px solid transparent;
+}
+
+.puzzle-piece.selected {
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 15px rgba(240, 98, 146, 0.6);
+    transform: scale(1.05);
+    z-index: 50;
 }
 
 .puzzle-piece:active {
-    cursor: grabbing;
-    transform: scale(1.05);
-    z-index: 100;
+    transform: scale(0.95);
 }
 
 .puzzle-piece.correct {
@@ -276,6 +285,34 @@ section.active {
     color: var(--dark-pink);
 }
 
-.hidden {
-    display: none;
+@media (max-width: 600px) {
+    :root {
+        --puzzle-size: 80px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .valentine-ask {
+        font-size: 1.8rem;
+    }
+
+    .button-group {
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    #no-btn {
+        position: relative;
+        left: 0;
+    }
+
+    .completed-image {
+        width: 80vw;
+    }
+
+    .yay {
+        font-size: 3rem;
+    }
 }

@@ -59,39 +59,44 @@ document.addEventListener('DOMContentLoaded', () => {
             piece.style.backgroundPosition = `-${x}px -${y}px`;
             piece.dataset.correctPos = targetPos;
 
-            console.log(`Piece ${i} created with correctPos: ${targetPos} (BG: -${x}px -${y}px)`);
-
-            piece.addEventListener('dragstart', handleDragStart);
-            piece.addEventListener('dragover', handleDragOver);
-            piece.addEventListener('drop', handleDrop);
+            piece.addEventListener('click', handlePieceClick);
 
             puzzleContainer.appendChild(piece);
             pieces.push(piece);
         }
-        checkPuzzle(); // Check initially in case it naturally starts solved or near-solved
+        checkPuzzle();
     }
 
-    let draggedPiece = null;
+    let firstSelectedPiece = null;
 
-    function handleDragStart(e) {
-        draggedPiece = this;
+    function handlePieceClick() {
+        if (puzzleSolved) return;
+
+        if (!firstSelectedPiece) {
+            // First selection
+            firstSelectedPiece = this;
+            this.classList.add('selected');
+        } else if (firstSelectedPiece === this) {
+            // Deselect if clicking the same piece
+            this.classList.remove('selected');
+            firstSelectedPiece = null;
+        } else {
+            // Second selection - SWAP
+            swapPieces(firstSelectedPiece, this);
+            firstSelectedPiece.classList.remove('selected');
+            firstSelectedPiece = null;
+        }
     }
 
-    function handleDragOver(e) {
-        e.preventDefault();
-    }
+    function swapPieces(piece1, piece2) {
+        const bg1 = piece1.style.backgroundPosition;
+        const pos1 = piece1.dataset.correctPos;
 
-    function handleDrop(e) {
-        if (this === draggedPiece) return;
+        piece1.style.backgroundPosition = piece2.style.backgroundPosition;
+        piece1.dataset.correctPos = piece2.dataset.correctPos;
 
-        const draggedBg = draggedPiece.style.backgroundPosition;
-        const draggedCorrectPos = draggedPiece.dataset.correctPos;
-
-        draggedPiece.style.backgroundPosition = this.style.backgroundPosition;
-        draggedPiece.dataset.correctPos = this.dataset.correctPos;
-
-        this.style.backgroundPosition = draggedBg;
-        this.dataset.correctPos = draggedCorrectPos;
+        piece2.style.backgroundPosition = bg1;
+        piece2.dataset.correctPos = pos1;
 
         checkPuzzle();
     }
