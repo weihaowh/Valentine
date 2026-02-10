@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Valentine ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Section 1: Envelope -->
+        <section id="envelope-section" class="active">
+            <div class="envelope-wrapper">
+                <div id="envelope" class="close">
+                    <div class="front flap"></div>
+                    <div class="front pocket"></div>
+                    <div class="letter">
+                        <div class="words line1">To Stephanie</div>
+                    </div>
+                    <div class="hearts">
+                        <div class="heart a1"></div>
+                        <div class="heart a2"></div>
+                        <div class="heart a3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="click-instruction">Tap the envelope</div>
+        </section>
+
+        <!-- Section 2: Puzzle -->
+        <section id="puzzle-section">
+            <h1 class="title">You Complete Me...</h1>
+            <p class="subtitle">Put the pieces of us back together</p>
+            <div id="puzzle-container"></div>
+            <div id="puzzle-message" class="hidden">Perfect!</div>
+            <button id="skip-puzzle" class="skip-btn">Skip Puzzle</button>
+        </section>
+
+        <!-- Section 3: Proposal -->
+        <section id="proposal-section">
+            <div class="proposal-content">
+                <img src="Assets/Picture.PNG" alt="Our Picture" class="completed-image">
+                <h2 class="valentine-ask">Will you be my Valentine?</h2>
+                <div class="button-group">
+                    <button id="yes-btn">YES! ❤️</button>
+                    <button id="no-btn">No</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Screen -->
+        <section id="success-section">
+            <div class="success-content">
+                <h1 class="yay">YAYYY I knew you would say Yes ❤️</h1>
+                <p>I love you pao! ❤️</p>
+                <div class="celebration-hearts"></div>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
